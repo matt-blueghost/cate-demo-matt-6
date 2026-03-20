@@ -7,10 +7,6 @@ function formatPrice(price: number): string {
   return price.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 }
 
-// TODO: Connect to cart.removeFromCart(item.id)
-function handleRemove(_itemId: string): void {
-  // no-op — waiting to be connected to the store
-}
 </script>
 
 <template>
@@ -72,17 +68,13 @@ function handleRemove(_itemId: string): void {
                       {{ formatPrice(item.price * item.quantity) }}
                     </div>
 
-                    <!--
-                      Remove button — rendered but click handler is a no-op.
-                      TODO: Connect to cart.removeFromCart(item.id)
-                    -->
                     <Button
                       label="✕"
                       severity="danger"
                       variant="text"
                       size="small"
                       aria-label="Remove item"
-                      @click="handleRemove(item.id)"
+                      @click="cart.removeFromCart(item.id)"
                     />
                   </div>
                 </div>
