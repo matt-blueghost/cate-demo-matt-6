@@ -106,12 +106,13 @@ function handleRemove(_itemId: string): void {
                 </div>
 
                 <div class="shipping-selector">
-                  <!--
-                    Static shipping label — not connected to the store.
-                    TODO: Replace with Select component bound to cart.shippingOptions
-                    and @update:model-value="cart.setShippingOption($event)"
-                  -->
-                  <span class="shipping-static">Standard Shipping — $5.99</span>
+                  <Select
+                    :model-value="cart.selectedShippingOptionId"
+                    :options="cart.shippingOptions"
+                    option-label="label"
+                    option-value="id"
+                    @update:model-value="cart.setShippingOption"
+                  />
                 </div>
               </div>
 
@@ -367,11 +368,6 @@ function handleRemove(_itemId: string): void {
   border: 1px solid var(--p-surface-700, #3f3f46);
   border-radius: 8px;
   padding: 0.625rem 0.875rem;
-}
-
-.shipping-static {
-  font-size: 0.875rem;
-  color: var(--p-surface-300, #d4d4d8);
 }
 
 .cart-summary-total {
