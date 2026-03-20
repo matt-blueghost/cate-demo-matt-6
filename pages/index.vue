@@ -52,18 +52,14 @@ function handleRemove(_itemId: string): void {
                 <div class="cart-item-controls">
                   <div class="cart-item-quantity">
                     <label class="qty-label">Qty</label>
-                    <!--
-                      Quantity stepper — rendered but not wired to the store.
-                      TODO: Connect to cart.updateQuantity(item.id, newQty)
-                    -->
                     <InputNumber
                       :model-value="item.quantity"
                       :min="1"
                       :max="99"
-                      :disabled="true"
                       show-buttons
                       button-layout="horizontal"
                       :input-style="{ width: '3rem', textAlign: 'center' }"
+                      @update:model-value="(val) => cart.updateQuantity(item.id, val)"
                     />
                   </div>
 
