@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(git:*)",
+      "Bash(npm *)",
+      "Bash(npm:*)",
+      "Bash(npx nuxt *)",
+      "Bash(npx vitest *)",
+      "Bash(echo *)",
+      "Bash(git diff main...HEAD --stat && echo \"---\" && git log main..HEAD --oneline)",
+      "Bash(.cate/scripts/*)",
+      "Bash(.cate/scripts/* *)",
+      "Glob",
+      "Grep",
+      "Read",
+      "mcp__leftenant__*"
+    ],
+    "defaultMode": "acceptEdits"
+  },
+  "enabledMcpjsonServers": ["leftenant"]
+}

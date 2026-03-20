@@ -1,0 +1,12 @@
+name: testing
+required: true
+description: >
+  All Vitest specs must pass. Existing store tests must continue to pass
+  after any code changes.
+
+gates:
+  - name: 'unit-tests'
+    command: 'npm test'
+    pass-condition: 'exit-code-zero'
+    description: 'Run all Vitest specs — must pass with zero failures'
+    run: 'before-pr'

@@ -1,0 +1,93 @@
+{
+  "version": "2",
+  "demo": true,
+  "project": {
+    "name": "cate-demo-matt-6",
+    "description": "Demo shopping cart project — powered by Cate"
+  },
+  "tracker": {
+    "provider": "github",
+    "projectName": "cate-demo-matt-6",
+    "statusOptions": {
+      "ready": { "optionId": "01209003" },
+      "in_progress": { "optionId": "273f2c54" },
+      "in_review": { "optionId": "22b15510" },
+      "human_review": { "optionId": "966e8f46" },
+      "done": { "optionId": "b081fe5d" }
+    },
+    "owner": { "name": "matt-blueghost", "type": "OWNER_TYPE_USER" },
+    "repo": "cate-demo-matt-6",
+    "projectNumber": 7,
+    "statusFieldId": "PVTSSF_lAHOD8maUs4BSWXwzg_6R_U"
+  },
+  "git": {
+    "defaultBranch": "main",
+    "branchPattern": "task/ISSUE-{number}-{description}",
+    "commitFormat": "conventional"
+  },
+  "autonomy": {
+    "default": "full"
+  },
+  "statuses": [
+    { "id": "ready", "name": "To Do", "color": "#3b82f6" },
+    { "id": "in_progress", "name": "In Progress", "color": "#f59e0b" },
+    { "id": "in_review", "name": "In Review", "color": "#8b5cf6" },
+    { "id": "human_review", "name": "Human Review", "color": "#ec4899" },
+    { "id": "done", "name": "Done", "color": "#22c55e" }
+  ],
+  "queue": {
+    "worker": {
+      "entries": [{ "status": "ready" }]
+    },
+    "reviewer": {
+      "entries": [{ "status": "in_review" }]
+    },
+    "human-review": {
+      "entries": [{ "status": "human_review" }]
+    },
+    "in_progress": {
+      "entries": [{ "status": "in_progress" }]
+    }
+  },
+  "commands": {
+    "work": {
+      "name": "Work",
+      "description": "Find and execute the highest-priority task",
+      "prompt": "commands/work.md",
+      "tab": { "persistent": { "minAllocation": 3 } },
+      "parameters": {
+        "issue_id": {
+          "type": "string",
+          "required": true,
+          "description": "The issue number to work on"
+        }
+      },
+      "transitions": [
+        { "on": "claim_new", "from": "ready", "to": "in_progress" },
+        { "on": "submit", "from": "in_progress", "to": "in_review" },
+        { "on": "promote_parent", "from": "ready", "to": "in_progress" },
+        { "on": "stuck", "from": "in_progress", "to": "ready" }
+      ]
+    },
+    "review": {
+      "name": "Review",
+      "description": "Review a pull request for correctness and quality",
+      "prompt": "commands/review.md",
+      "tab": { "persistent": { "minAllocation": 1 } },
+      "parameters": {
+        "issue_id": {
+          "type": "string",
+          "required": true,
+          "description": "The issue to review"
+        }
+      },
+      "transitions": [
+        { "on": "approve", "from": "in_review", "to": "human_review" },
+        { "on": "approve_subtask", "from": "in_review", "to": "done" },
+        { "on": "approve_supervised", "from": "in_review", "to": "human_review" },
+        { "on": "request_changes", "from": "in_review", "to": "ready" },
+        { "on": "complete_epic", "from": "in_progress", "to": "human_review" }
+      ]
+    }
+  }
+}

@@ -1,0 +1,29 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Nuxt
+.nuxt/
+.output/
+.data/
+dist/
+
+# Build
+.cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Env
+.env
+.env.*
+!.env.example

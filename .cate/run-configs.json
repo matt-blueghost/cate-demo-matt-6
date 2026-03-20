@@ -1,0 +1,16 @@
+{
+  "configurations": [
+    {
+      "id": "dev-server",
+      "name": "Run Dev Server",
+      "commands": [
+        {
+          "id": "dev",
+          "label": "Dev Server",
+          "command": "npm install && npm run dev",
+          "cwd": "."
+        }
+      ]
+    }
+  ]
+}
